@@ -5,7 +5,6 @@ export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -40,10 +39,7 @@ export function HeroSection() {
         }}
       ></motion.div>
       
-      <motion.div 
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center"
-        style={{ opacity }}
-      >
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -132,7 +128,7 @@ export function HeroSection() {
             />
           </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
