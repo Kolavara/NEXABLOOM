@@ -26,7 +26,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center pt-16 overflow-hidden relative">
+    <section className="flex items-center justify-center pt-32 pb-16 overflow-hidden relative">
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card pointer-events-none"></div>
       
@@ -41,7 +41,7 @@ export function HeroSection() {
       ></motion.div>
       
       <motion.div 
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-center"
         style={{ opacity }}
       >
         <motion.div
@@ -114,7 +114,7 @@ export function HeroSection() {
         
         {/* Hero Image */}
         <motion.div 
-          className="mt-20"
+          className="mt-12"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 1 }}

@@ -84,7 +84,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-32 bg-card/30 border-t border-border" data-testid="contact-section">
+    <section id="contact" ref={sectionRef} className="py-16 md:py-20 bg-card/30 border-t border-border" data-testid="contact-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="fade-in-section">

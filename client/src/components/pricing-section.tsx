@@ -89,7 +89,7 @@ export function PricingSection() {
   };
 
   return (
-    <section id="pricing" ref={sectionRef} className="py-32 bg-card/30" data-testid="pricing-section">
+    <section id="pricing" ref={sectionRef} className="py-16 md:py-20 bg-card/30" data-testid="pricing-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center mb-20"

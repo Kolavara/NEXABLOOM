@@ -57,7 +57,7 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" ref={sectionRef} className="py-32 bg-background" data-testid="projects-section">
+    <section id="projects" ref={sectionRef} className="py-16 md:py-20 bg-background" data-testid="projects-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center mb-20"
