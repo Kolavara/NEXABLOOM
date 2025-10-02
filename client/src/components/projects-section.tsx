@@ -1,25 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 export function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    const fadeInElements = sectionRef.current?.querySelectorAll('.fade-in-section');
-    fadeInElements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(gridRef, { once: true, margin: "-100px" });
 
   const projects = [
     {
@@ -48,25 +33,65 @@ export function ProjectsSection() {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <section id="projects" ref={sectionRef} className="py-32 bg-background" data-testid="projects-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20 fade-in-section">
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6" data-testid="projects-title">
             We Ship. All the time.
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="projects-subtitle">
             Showcasing our AI-powered projects that transform ideas into reality
           </p>
-        </div>
+        </motion.div>
         
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {projects.map((project, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-card border border-border rounded-2xl overflow-hidden project-card-hover cursor-pointer group fade-in-section"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="bg-card border border-border rounded-2xl overflow-hidden cursor-pointer group"
+              variants={cardVariants}
+              whileHover={{ 
+                y: -8,
+                boxShadow: "0 20px 40px rgba(59, 130, 246, 0.15)",
+                transition: { duration: 0.3 }
+              }}
               data-testid={project.testId}
             >
               <div className="relative h-64 overflow-hidden project-card">
@@ -99,12 +124,18 @@ export function ProjectsSection() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Additional Project Details */}
-        <div className="mt-16 fade-in-section">
+        <motion.div 
+          className="mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <div className="bg-card border border-border rounded-2xl p-8 md:p-12">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
@@ -128,7 +159,7 @@ export function ProjectsSection() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

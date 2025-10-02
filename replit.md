@@ -37,8 +37,19 @@ Preferred communication style: Simple, everyday language.
 **Page Structure**
 - Single-page application with sections: Hero, Logo Carousel, Services, Pricing, Projects, Contact
 - Scroll-based navigation with smooth scrolling between sections
-- Intersection Observer API for fade-in animations on scroll
+- Advanced scroll-triggered animations powered by Framer Motion
+- Parallax effects on hero section background elements
+- Stagger animations for card grids with sequential reveals
+- Interactive hover effects with smooth transitions
 - Mobile-responsive design with hamburger menu navigation
+
+**Animation System (October 2025)**
+- Framer Motion integration for advanced animations
+- Hero section features parallax scrolling background and sequential content reveals
+- Service, Pricing, and Projects sections use stagger animations for card grids
+- Hover interactions include scale, shadow, and rotation effects
+- useInView hooks for scroll-triggered animations with performance optimization
+- All animations designed to enhance rather than distract from content
 
 ### Backend Architecture
 

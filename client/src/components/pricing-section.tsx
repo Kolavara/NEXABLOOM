@@ -1,26 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Check } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 export function PricingSection() {
   const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    const fadeInElements = sectionRef.current?.querySelectorAll('.fade-in-section');
-    fadeInElements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardsRef, { once: true, margin: "-100px" });
 
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
@@ -80,29 +65,69 @@ export function PricingSection() {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <section id="pricing" ref={sectionRef} className="py-32 bg-card/30" data-testid="pricing-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20 fade-in-section">
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6" data-testid="pricing-title">
             Partnership Models
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="pricing-subtitle">
             Choose the partnership level that matches your vision and needs
           </p>
-        </div>
+        </motion.div>
         
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <motion.div 
+          ref={cardsRef}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
           {pricingPlans.map((plan, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`pricing-card-hover rounded-2xl p-8 relative fade-in-section ${
+              className={`rounded-2xl p-8 relative ${
                 plan.isPopular 
                   ? 'bg-card border-2 border-primary' 
                   : 'bg-card border border-border'
               }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              variants={cardVariants}
+              whileHover={{ 
+                y: -4,
+                borderColor: plan.isPopular ? "hsl(var(--primary))" : "hsl(var(--accent))",
+                transition: { duration: 0.3 }
+              }}
               data-testid={plan.testId}
             >
               {plan.isPopular && (
@@ -135,20 +160,22 @@ export function PricingSection() {
                 </ul>
               </div>
               
-              <button
+              <motion.button
                 onClick={scrollToContact}
                 className={`block w-full py-3 px-6 text-center rounded-lg transition-all font-semibold ${
                   plan.buttonVariant === 'primary'
                     ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg'
                     : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border'
                 }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 data-testid={`pricing-button-${plan.name.toLowerCase().replace(/\s+/g, '-')}`}
               >
                 {plan.buttonText}
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
