@@ -24,7 +24,7 @@ export default function Home() {
       {/* About Section */}
       <section className="pt-0 px-6">
         <div className="max-w-5xl mx-auto text-center fade-in-section">
-          <p className="text-muted-foreground uppercase tracking-wider mb-2">What We Do</p>
+          <p className="text-muted-foreground uppercase tracking-wider mb-1">What We Do</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
             NexaBloom empowers innovators to launch real companies, seamlessly operated by <span className="gradient-text">advanced AI</span>
           </h2>

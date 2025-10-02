@@ -34,7 +34,7 @@ export function LogoCarousel() {
 
   return (
     <section className="pb-0 bg-card/50 border-y border-border/40 overflow-hidden" data-testid="logo-carousel">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-3">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-1">
         <h2 className="text-3xl font-bold text-center text-foreground" data-testid="carousel-title">
           Innovative Companies <span className="text-muted-foreground">Powered by NexaBloom</span>
         </h2>
