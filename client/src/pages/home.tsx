@@ -22,7 +22,7 @@ export default function Home() {
       <LogoCarousel />
       
       {/* About Section */}
-      <section className="py-4 md:py-6 px-6">
+      <section className="py-2 md:py-4 px-6">
         <div className="max-w-5xl mx-auto text-center fade-in-section">
           <p className="text-muted-foreground uppercase tracking-wider mb-6">What We Do</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
